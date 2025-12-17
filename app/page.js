@@ -5,6 +5,7 @@ import Main from './components/Main'
 import Movie from './components/Movie'
 import Row from './components/Row'
 import requests from './request'
+import Footer from './components/Footer'
 
 const page = () => {
   return (
@@ -37,7 +38,7 @@ const page = () => {
         <p className="font-bold text-2xl px-5">Horror</p>
         <Row rowID='5' title='Horror' fetchURL={requests.requestHorror} />
       </div>
-
+      <Footer/>
     </div>
   )
 }
