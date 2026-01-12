@@ -1,26 +1,31 @@
 "use client" // <--- Ye line is component ko interactive bana rahi hai
 import React from 'react';
+import Link from 'next/link';
 // Agar aapne react-icons install kiya hai, toh buttons ke liye use kar sakte hain
 import { FaPlay, FaStar } from 'react-icons/fa'; 
 
-const Movie = ({ item }) => {
+const Movie = ({ item, index = 0 }) => {
   // TMDB data se movie ka naam, rating aur release date nikalenge
   const title = item?.title || item?.name;
   const rating = item?.vote_average ? item.vote_average.toFixed(1) : 'N/A';
   const releaseDate = item?.release_date || item?.first_air_date;
+  // Movie ka unique identifier - movie object ko encode karke pass kar rahe hain
+  const movieData = encodeURIComponent(JSON.stringify(item));
 
   return (
     // Card container: width kam kiya taaki image ke neeche space mile
     <div className='w-[160px] sm:w-[200px] md:w-[240px] inline-block p-2'>
       
       {/* 1. Movie Poster Section */}
-      <div className='relative w-full h-auto cursor-pointer'>
-        <img
-          className='w-full h-auto rounded block'
-          src={`https://image.tmdb.org/t/p/w500/${item?.poster_path || item?.backdrop_path}`}
-          alt={title}
-        />
-      </div>
+      <Link href={`/movie/${index}?data=${movieData}`}>
+        <div className='relative w-full h-auto cursor-pointer hover:scale-105 transition transform duration-200'>
+          <img
+            className='w-full h-auto rounded block'
+            src={`https://image.tmdb.org/t/p/w500/${item?.poster_path || item?.backdrop_path}`}
+            alt={title}
+          />
+        </div>
+      </Link>
 
       {/* 2. Details Section (Image ke Neeche) */}
       <div className='flex flex-col mt-2 text-white'>
