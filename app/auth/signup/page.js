@@ -87,120 +87,172 @@ const SignUp = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gray-900 flex flex-col'>
+    <div className='min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-gray-900 flex flex-col relative overflow-hidden'>
+      {/* Background decorative elements */}
+      <div className='absolute top-0 right-0 w-96 h-96 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse'></div>
+      <div className='absolute bottom-0 left-0 w-96 h-96 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-2000'></div>
+
       <Navbar />
 
-      <div className='flex-1 flex items-center justify-center px-4 py-12'>
+      <div className='flex-1 flex items-center justify-center px-4 py-12 relative z-10'>
         <div className='w-full max-w-md'>
           {/* Card */}
-          <div className='bg-gray-800 rounded-lg shadow-2xl p-8 border border-gray-700'>
+          <div className='bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl p-8 border border-red-600 border-opacity-30 backdrop-blur-md hover:border-opacity-50 transition-all duration-300'>
             
             {/* Header */}
             <div className='mb-8 text-center'>
-              <h1 className='text-3xl font-bold text-white mb-2'>Create Account</h1>
-              <p className='text-gray-400'>MovieDB par join karo aur favorite movies dekho</p>
+              <div className='inline-block mb-4 p-3 bg-gradient-to-br from-red-600 to-red-700 rounded-full'>
+                <svg className='w-6 h-6 text-white' fill='currentColor' viewBox='0 0 20 20'>
+                  <path d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z' />
+                </svg>
+              </div>
+              <h1 className='text-4xl font-bold bg-gradient-to-r from-white to-red-300 bg-clip-text text-transparent mb-3'>Create Account</h1>
+              <p className='text-gray-400 text-sm'>MovieDB par join karo aur unlimited movies dekho</p>
             </div>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className='space-y-5'>
               
               {/* Full Name */}
-              <div>
-                <label htmlFor='fullName' className='block text-sm font-medium text-gray-300 mb-2'>
+              <div className='group'>
+                <label htmlFor='fullName' className='block text-sm font-semibold text-gray-300 mb-2 group-focus-within:text-red-400 transition'>
                   Full Name
                 </label>
-                <input
-                  type='text'
-                  id='fullName'
-                  name='fullName'
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  className='w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition'
-                  placeholder='Aapka naam'
-                />
-                {errors.fullName && <p className='text-red-500 text-sm mt-1'>{errors.fullName}</p>}
+                <div className='relative'>
+                  <input
+                    type='text'
+                    id='fullName'
+                    name='fullName'
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className='w-full px-4 py-3 bg-gray-700 bg-opacity-50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-opacity-20 transition-all duration-300 backdrop-blur-sm'
+                    placeholder='Aapka naam'
+                  />
+                  <svg className='absolute right-3 top-3 w-5 h-5 text-gray-500' fill='currentColor' viewBox='0 0 20 20'>
+                    <path d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z' />
+                  </svg>
+                </div>
+                {errors.fullName && <p className='text-red-400 text-sm mt-2 font-medium'>{errors.fullName}</p>}
               </div>
 
               {/* Email */}
-              <div>
-                <label htmlFor='email' className='block text-sm font-medium text-gray-300 mb-2'>
+              <div className='group'>
+                <label htmlFor='email' className='block text-sm font-semibold text-gray-300 mb-2 group-focus-within:text-red-400 transition'>
                   Email Address
                 </label>
-                <input
-                  type='email'
-                  id='email'
-                  name='email'
-                  value={formData.email}
-                  onChange={handleChange}
-                  className='w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition'
-                  placeholder='example@email.com'
-                />
-                {errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email}</p>}
+                <div className='relative'>
+                  <input
+                    type='email'
+                    id='email'
+                    name='email'
+                    value={formData.email}
+                    onChange={handleChange}
+                    className='w-full px-4 py-3 bg-gray-700 bg-opacity-50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-opacity-20 transition-all duration-300 backdrop-blur-sm'
+                    placeholder='example@email.com'
+                  />
+                  <svg className='absolute right-3 top-3 w-5 h-5 text-gray-500' fill='currentColor' viewBox='0 0 20 20'>
+                    <path d='M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z' />
+                    <path d='M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z' />
+                  </svg>
+                </div>
+                {errors.email && <p className='text-red-400 text-sm mt-2 font-medium'>{errors.email}</p>}
               </div>
 
               {/* Password */}
-              <div>
-                <label htmlFor='password' className='block text-sm font-medium text-gray-300 mb-2'>
+              <div className='group'>
+                <label htmlFor='password' className='block text-sm font-semibold text-gray-300 mb-2 group-focus-within:text-red-400 transition'>
                   Password
                 </label>
-                <input
-                  type='password'
-                  id='password'
-                  name='password'
-                  value={formData.password}
-                  onChange={handleChange}
-                  className='w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition'
-                  placeholder='Min 6 characters'
-                />
-                {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
+                <div className='relative'>
+                  <input
+                    type='password'
+                    id='password'
+                    name='password'
+                    value={formData.password}
+                    onChange={handleChange}
+                    className='w-full px-4 py-3 bg-gray-700 bg-opacity-50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-opacity-20 transition-all duration-300 backdrop-blur-sm'
+                    placeholder='Min 6 characters'
+                  />
+                  <svg className='absolute right-3 top-3 w-5 h-5 text-gray-500' fill='currentColor' viewBox='0 0 20 20'>
+                    <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />
+                  </svg>
+                </div>
+                {errors.password && <p className='text-red-400 text-sm mt-2 font-medium'>{errors.password}</p>}
               </div>
 
               {/* Confirm Password */}
-              <div>
-                <label htmlFor='confirmPassword' className='block text-sm font-medium text-gray-300 mb-2'>
+              <div className='group'>
+                <label htmlFor='confirmPassword' className='block text-sm font-semibold text-gray-300 mb-2 group-focus-within:text-red-400 transition'>
                   Confirm Password
                 </label>
-                <input
-                  type='password'
-                  id='confirmPassword'
-                  name='confirmPassword'
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className='w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition'
-                  placeholder='Password confirm karo'
-                />
-                {errors.confirmPassword && <p className='text-red-500 text-sm mt-1'>{errors.confirmPassword}</p>}
+                <div className='relative'>
+                  <input
+                    type='password'
+                    id='confirmPassword'
+                    name='confirmPassword'
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    className='w-full px-4 py-3 bg-gray-700 bg-opacity-50 border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-opacity-20 transition-all duration-300 backdrop-blur-sm'
+                    placeholder='Password confirm karo'
+                  />
+                  <svg className='absolute right-3 top-3 w-5 h-5 text-gray-500' fill='currentColor' viewBox='0 0 20 20'>
+                    <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />
+                  </svg>
+                </div>
+                {errors.confirmPassword && <p className='text-red-400 text-sm mt-2 font-medium'>{errors.confirmPassword}</p>}
               </div>
 
               {/* Submit Error */}
-              {errors.submit && <p className='text-red-500 text-sm text-center bg-red-900 bg-opacity-20 p-2 rounded'>{errors.submit}</p>}
+              {errors.submit && (
+                <div className='bg-red-600 bg-opacity-20 border-l-4 border-red-600 p-3 rounded text-red-400 text-sm font-medium'>
+                  {errors.submit}
+                </div>
+              )}
 
               {/* Submit Button */}
               <button
                 type='submit'
                 disabled={loading}
-                className='w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-2.5 rounded-lg transition duration-200'
+                className='w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold py-3 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-red-600/50 relative overflow-hidden group disabled:cursor-not-allowed'
               >
-                {loading ? 'Creating...' : 'Create Account'}
+                <span className='relative z-10 flex items-center justify-center'>
+                  {loading ? (
+                    <>
+                      <svg className='animate-spin -ml-1 mr-2 h-4 w-4 text-white' fill='none' viewBox='0 0 24 24'>
+                        <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
+                        <path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+                      </svg>
+                      Creating...
+                    </>
+                  ) : (
+                    'Create Account'
+                  )}
+                </span>
+                <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-500'></div>
               </button>
             </form>
 
             {/* Divider */}
-            <div className='my-6 flex items-center'>
-              <div className='flex-1 border-t border-gray-600'></div>
-              <p className='px-3 text-gray-400 text-sm'>Already have an account?</p>
-              <div className='flex-1 border-t border-gray-600'></div>
+            <div className='my-8 flex items-center'>
+              <div className='flex-1 border-t border-gray-700'></div>
+              <p className='px-3 text-gray-500 text-sm font-medium'>Already have an account?</p>
+              <div className='flex-1 border-t border-gray-700'></div>
             </div>
 
             {/* Sign In Link */}
             <div className='text-center'>
-              <p className='text-gray-300'>
-                <Link href='/auth/signin' className='text-red-500 hover:text-red-400 font-semibold transition'>
+              <p className='text-gray-400'>
+                <Link href='/auth/signin' className='text-red-500 hover:text-red-400 font-bold transition hover:underline'>
                   Sign In
                 </Link>
               </p>
             </div>
           </div>
+
+          {/* Footer text */}
+          <p className='text-center text-gray-500 text-xs mt-6'>
+            By creating an account, you agree to our Terms and Privacy Policy
+          </p>
         </div>
       </div>
 

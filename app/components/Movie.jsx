@@ -1,10 +1,12 @@
 "use client" // <--- Ye line is component ko interactive bana rahi hai
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 // Agar aapne react-icons install kiya hai, toh buttons ke liye use kar sakte hain
 import { FaPlay, FaStar } from 'react-icons/fa'; 
 
 const Movie = ({ item, index = 0 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
   // TMDB data se movie ka naam, rating aur release date nikalenge
   const title = item?.title || item?.name;
   const rating = item?.vote_average ? item.vote_average.toFixed(1) : 'N/A';
@@ -13,40 +15,49 @@ const Movie = ({ item, index = 0 }) => {
   const movieData = encodeURIComponent(JSON.stringify(item));
 
   return (
-    // Card container: width kam kiya taaki image ke neeche space mile
-    <div className='w-[160px] sm:w-[200px] md:w-[240px] inline-block p-2'>
+    // Card container
+    <div 
+      className='w-[160px] sm:w-[200px] md:w-[240px] inline-block p-2'
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       
       {/* 1. Movie Poster Section */}
       <Link href={`/movie/${index}?data=${movieData}`}>
-        <div className='relative w-full h-auto cursor-pointer hover:scale-105 transition transform duration-200'>
+        <div className='relative w-full h-auto cursor-pointer group'>
           <img
-            className='w-full h-auto rounded block'
+            className='w-full h-auto rounded-lg block shadow-xl group-hover:shadow-2xl group-hover:shadow-red-600/50 transition-all duration-300 group-hover:scale-110 origin-top'
             src={`https://image.tmdb.org/t/p/w500/${item?.poster_path || item?.backdrop_path}`}
             alt={title}
           />
+          {/* Overlay on hover */}
+          <div className='absolute inset-0 rounded-lg bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
         </div>
       </Link>
 
       {/* 2. Details Section (Image ke Neeche) */}
-      <div className='flex flex-col mt-2 text-white'>
+      <div className='flex flex-col mt-3 text-white'>
         
         {/* Title */}
-        <p className='text-sm font-bold truncate hover:whitespace-normal'>{title}</p>
+        <p className='text-sm font-bold truncate hover:text-red-400 transition-colors duration-200 line-clamp-2'>
+          {title}
+        </p>
         
         {/* Rating and Date */}
-        <div className='flex items-center text-xs text-gray-400 my-1 justify-between'>
+        <div className='flex items-center text-xs text-gray-400 my-2 justify-between'>
             {/* Rating */}
-            <p className='flex items-center'>
-                <FaStar className='text-yellow-400 mr-1' /> {rating}
-            </p>
+            <div className='flex items-center bg-gray-800 bg-opacity-50 px-2 py-1 rounded'>
+                <FaStar className='text-yellow-400 mr-1' size={10} /> 
+                <span className='font-semibold'>{rating}</span>
+            </div>
             {/* Date */}
-            <p>{releaseDate ? releaseDate.substring(0, 4) : ''}</p>
+            <p className='text-gray-500 font-medium'>{releaseDate ? releaseDate.substring(0, 4) : ''}</p>
         </div>
 
         {/* Play Button */}
         <button 
-          className='flex items-center justify-center bg-red-600 hover:bg-red-700 text-white py-1.5 rounded text-sm transition duration-200 mt-1'
-          onClick={() => alert(`Playing ${title}`)} // Temporary action
+          className='flex items-center justify-center bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 mt-2 shadow-lg hover:shadow-red-600/50 transform hover:scale-105 active:scale-95'
+          onClick={() => alert(`Playing ${title}`)}
         >
           <FaPlay className='mr-2 text-xs' /> Play
         </button>
